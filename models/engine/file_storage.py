@@ -17,20 +17,20 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj.to_dict()
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
-        with open(self.__file_path, 'a') as f:
-            dic = {}
-            for key, value in self.__objects.items():
-                dic.uptade({key: value.to_dict()})
-            f.write(json.dumps(dic))
+        objs_dict = {}
+        for obj_elem in self.__objects:
+            objs_dict[obj_elem] = self.__objects[obj_elem].to_dict()
+        with open(self.__file_path, 'w') as f:
+            f.write(json.dumps(objs_dict))
 
     def reload(self):
         try:
             with open(self.__file_path) as f:
                 objs_json = json.loads(f.read())
-                print(objs_json)
-                #self.__objects["{}.{}".format(self.__objects['__class__'], self.__objects['id'])] = objs_json
+                for obj_elem in objs_json:
+                    self.__objects[obj_elem] = BaseModel(**(objs_json[obj_elem]))
         except IOError:
             pass
