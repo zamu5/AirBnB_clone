@@ -1,0 +1,7 @@
+# Ignore emacs autosave~ and #modified# files
+*~
+**/*~
+**/\#*
+
+# Ignore compiled __pycache__ folder
+**/__pycache__/*
