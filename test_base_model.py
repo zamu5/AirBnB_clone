@@ -12,3 +12,15 @@ print(my_model_json)
 print("JSON of my_model:")
 for key in my_model_json.keys():
     print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+
+my_model2 = BaseModel()
+my_model2.name = "Holberton"
+my_model2.my_number = 89
+print(my_model2)
+my_model2.save()
+print(my_model2)
+my_model2_json = my_model2.to_dict()
+print(my_model2_json)
+print("JSON of my_model2:")
+for key in my_model2_json.keys():
+    print("\t{}: ({}) - {}".format(key, type(my_model2_json[key]), my_model2_json[key]))

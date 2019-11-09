@@ -38,6 +38,8 @@ class BaseModel:
     def to_dict(self):
         dictionary = self.__dict__
         dictionary['__class__'] = self.__class__.__name__
-        dictionary['created_at'] = datetime.isoformat(self.created_at)
-        dictionary['updated_at'] = datetime.isoformat(self.updated_at)
+        if type(self.created_at) is not str:
+            dictionary['created_at'] = self.created_at.isoformat()
+        if type(self.updated_at) is not str:
+            dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary

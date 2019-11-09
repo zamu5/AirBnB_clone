@@ -62,13 +62,11 @@ class HBNBCommand(cmd.Cmd):
             else:
                 key = list_arg[0] + "." + list_arg[1]
                 all_objs = storage.all()
-                print("--> Before ", all_objs)
                 if key not in all_objs:
                     print("** no instance found **")
                 else:
                     del all_objs[key]
-                    # storage.save()
-                    print("--> Atfer ", all_objs)
+                    storage.save()
 
     def do_quit(self, arg):
         """stop the command line interpreter"""
