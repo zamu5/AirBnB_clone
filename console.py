@@ -115,8 +115,6 @@ class HBNBCommand(cmd.Cmd):
             elif len(list_arg) < 4:
                 print("** value missing **")
 
-
-
     def do_quit(self, arg):
         """stop the command line interpreter"""
         return True
