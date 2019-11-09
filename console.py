@@ -68,6 +68,29 @@ class HBNBCommand(cmd.Cmd):
                     del all_objs[key]
                     storage.save()
 
+    def do_update(self, line):
+        list_arg = line.split()
+        if len(list_arg) == 0:
+            print("** class name missing **")
+        elif not list_arg[0] in self.com_list:
+            print("** class doesn't exist **")
+        elif len(list_arg) == 1:
+            print("** instance id missing **")
+        elif "{}.{}".format(list_arg[0],
+                            list_arg[1])not in storage.all().keys():
+            print("** no instance found **")
+        elif len(list_arg) == 2:
+            print("** attribute name missing ** ")
+        elif len(list_arg) == 3:
+            print("** value missing **")
+        else:
+            all_objs = storage.all()
+            key_aux = "{}.{}".format(list_arg[0], list_arg[1])
+            if key_aux in all_objs:
+                a = getattr(all_objs[key_aux], list_arg[2], "")
+                setattr(all_objs[key_aux], list_arg[2], type(a)(list_arg[3]))
+                all_objs[key_aux].save()
+
     def do_quit(self, arg):
         """stop the command line interpreter"""
         return True
@@ -78,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-         pass
+        pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
