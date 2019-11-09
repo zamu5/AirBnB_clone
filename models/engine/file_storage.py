@@ -4,6 +4,7 @@
 from ..base_model import BaseModel
 import json
 
+
 class FileStorage:
     """
     Serializes instances to a JSON file
@@ -29,8 +30,8 @@ class FileStorage:
     def reload(self):
         try:
             with open(self.__file_path) as f:
-                objs_json = json.loads(f.read())
-                for obj_elem in objs_json:
-                    self.__objects[obj_elem] = BaseModel(**(objs_json[obj_elem]))
+                o_json = json.loads(f.read())
+                for obj_elem in o_json:
+                    self.__objects[obj_elem] = BaseModel(**(o_json[obj_elem]))
         except IOError:
             pass

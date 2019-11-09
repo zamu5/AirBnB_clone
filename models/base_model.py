@@ -4,6 +4,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """This class is the base of the console objects"""
     def __init__(self, *args, **kwargs):
@@ -15,7 +16,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != '__class__':
                     if (key == 'created_at') or (key == 'updated_at'):
-                        value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                        value = datetime.strptime(value,
+                                                  '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, value)
 
         else:

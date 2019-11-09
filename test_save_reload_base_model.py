@@ -14,3 +14,10 @@ my_model.name = "Holberton"
 my_model.my_number = 89
 my_model.save()
 print(my_model)
+
+print("-- Create a new object 2--")
+my_model2 = BaseModel()
+my_model2.name = "Holberton"
+my_model2.my_number = 89
+my_model2.save()
+print(my_model2)
