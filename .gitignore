@@ -5,3 +5,4 @@
 
 # Ignore compiled __pycache__ folder
 **/__pycache__/*
+**/*.pyc
