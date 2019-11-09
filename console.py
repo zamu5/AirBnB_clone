@@ -68,6 +68,7 @@ class HBNBCommand(cmd.Cmd):
                     del all_objs[key]
                     storage.save()
 
+<<<<<<< HEAD
     def do_update(self, line):
         list_arg = line.split()
         if len(list_arg) == 0:
@@ -90,6 +91,31 @@ class HBNBCommand(cmd.Cmd):
                 a = getattr(all_objs[key_aux], list_arg[2], "")
                 setattr(all_objs[key_aux], list_arg[2], type(a)(list_arg[3]))
                 all_objs[key_aux].save()
+
+    def do_all(self, line):
+        """
+        Prints all string representation of all instances based or not on the
+        class name. Ex: $ all BaseModel or $ all
+        """
+        if not line:
+            all_objs = storage.all()
+            list_obj = []
+            for objs in all_objs:
+                list_obj.append(str(all_objs[objs]))
+            print(list_obj)
+        else:
+            list_arg = line.split()
+            for arg in list_arg:
+                if arg not in self.com_list:
+                    print("** class doesn't exist **")
+                else:
+                    all_objs = storage.all()
+                    list_obj = []
+                    for key_obj in all_objs:
+                        k = key_obj.split(".")
+                        if k[0] == arg:
+                            list_obj.append(str(all_objs[key_obj]))
+                    print(list_obj)
 
     def do_quit(self, arg):
         """stop the command line interpreter"""
