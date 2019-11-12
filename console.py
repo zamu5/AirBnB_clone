@@ -101,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
             all_objs = storage.all()
             key_aux = "{}.{}".format(list_arg[0], list_arg[1])
             if key_aux in all_objs:
-                a = getattr(all_objs[key_aux], list_arg[2])
+                a = getattr(all_objs[key_aux], list_arg[2], "")
                 setattr(all_objs[key_aux], list_arg[2], type(a)(list_arg[3]))
                 all_objs[key_aux].save()
 
