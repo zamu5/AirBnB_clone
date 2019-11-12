@@ -7,6 +7,7 @@ import models
 
 class BaseModel:
     """This class is the base of the console objects"""
+
     def __init__(self, *args, **kwargs):
         """
         the constructor init have the attributes
@@ -36,6 +37,9 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
+        """class public method that returns a dictionary containing all
+        keys/values of __dict__ of the instance
+        """
         dictionary = self.__dict__
         dictionary['__class__'] = self.__class__.__name__
         if type(self.created_at) is not str:
