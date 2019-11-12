@@ -112,17 +112,16 @@ class HBNBCommand(cmd.Cmd):
             print(list_obj)
         else:
             list_arg = line.split()
-            for arg in list_arg:
-                if arg not in self.com_list:
-                    print("** class doesn't exist **")
-                else:
-                    all_objs = storage.all()
-                    list_obj = []
-                    for key_obj in all_objs:
-                        k = key_obj.split(".")
-                        if k[0] == arg:
-                            list_obj.append(str(all_objs[key_obj]))
-                    print(list_obj)
+            if list_arg[0] not in self.com_list:
+                print("** class doesn't exist **")
+            else:
+                all_objs = storage.all()
+                list_obj = []
+                for key_obj in all_objs:
+                    k = key_obj.split(".")
+                    if k[0] == list_arg[0]:
+                        list_obj.append(str(all_objs[key_obj]))
+                print(list_obj)
 
     def do_quit(self, arg):
         """stop the command line interpreter"""
