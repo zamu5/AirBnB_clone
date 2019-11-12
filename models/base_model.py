@@ -40,10 +40,12 @@ class BaseModel:
         """class public method that returns a dictionary containing all
         keys/values of __dict__ of the instance
         """
-        dictionary = self.__dict__
+        dictionary = {}
+        obj_dict = self.__dict__
         dictionary['__class__'] = self.__class__.__name__
-        if type(self.created_at) is not str:
-            dictionary['created_at'] = self.created_at.isoformat()
-        if type(self.updated_at) is not str:
-            dictionary['updated_at'] = self.updated_at.isoformat()
+        for k in obj_dict:
+            if k == "created_at" or k == "updated_at":
+                dictionary[k] = obj_dict[k].isoformat()
+            else:
+                dictionary[k] = obj_dict[k]
         return dictionary
