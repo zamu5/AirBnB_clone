@@ -18,7 +18,7 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = {}
-    com_list = {"BaseModel" : BaseModel, "User" : User, "Place": Place,
+    com_list = {"BaseModel": BaseModel, "User": User, "Place": Place,
                 "State": State, "City": City, "Amenity": Amenity,
                 "Review": Review}
 
@@ -42,6 +42,7 @@ class FileStorage:
                 o_json = json.loads(f.read())
                 for obj_elem in o_json:
                     obj_class = obj_elem.split(".")
-                    self.__objects[obj_elem] = FileStorage.com_list[obj_class[0]](**(o_json[obj_elem]))
+                    self.__objects[obj_elem] = FileStorage.com_list[
+                        obj_class[0]](**(o_json[obj_elem]))
         except IOError:
             pass
