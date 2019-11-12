@@ -5,9 +5,11 @@ Unittest module for BaseModel class
 
 import unittest
 from models.base_model import BaseModel
+from models import storage
 from datetime import datetime
 from uuid import uuid4
 import json
+import os
 
 
 class TestBaseClass(unittest.TestCase):
@@ -24,6 +26,10 @@ class TestBaseClass(unittest.TestCase):
     def test_datetime(self):
         self.assertTrue(isinstance(self.model.created_at, datetime))
         self.assertTrue(isinstance(self.model_2.created_at, datetime))
+
+    def test_time(self):
+        self.assertIsInstance(datetime.strptime(
+            self.model.created_at, "%Y-%m-%dT%H:%M:%S.%f"), datetime)
 
     def test_str(self):
         self.assertEqual(str(self.model), "[{}] ({}) {}".format(
@@ -64,6 +70,18 @@ class TestBaseClass(unittest.TestCase):
                 self.assertTrue(type(k) is str)
                 self.assertEqual(k, "{}.{}".format(v["__class__"], v["id"]))
                 self.assertTrue(type(v) is dict)
+        os.remove("file.json")
+
+    def test_from_dictionary(self):
+        my_model = BaseModel()
+        my_model.name = "Holberton"
+        my_model.my_number = 89
+        self.assertTrue(isinstance(my_model.created_at, datetime))
+        my_model_json = my_model.to_dict()
+        my_new_model = BaseModel(**my_model_json)
+        self.assertEqual(my_model.id, my_new_model.id)
+        self.assertTrue(isinstance(my_new_model.created_at, datetime))
+        self.assertFalse(my_model is my_new_model)
 
 if __name__ == '__main__':
     unittest.main()
