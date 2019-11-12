@@ -1,12 +1,12 @@
 # AirBnB_clone 
 
-![HBnB](https://github.com/zamu5/AirBnB_clone/HBnB.png)
+![HBnB](https://github.com/zamu5/AirBnB_clone/blob/master/HBnB.png)
 
 ## Description
 
 This project is the first step of a big project with the goal of deploy on your server a simple copy of the [AirBnB website](https://www.airbnb.com/)
 
-![Console](https://github.com/zamu5/AirBnB_clone/console.png)
+![Console](https://github.com/zamu5/AirBnB_clone/blob/master/console.png)
 
 This fisrt step is manipulate a powerful storage system. This storage engine will give us an abstraction between “My object” and “How they are stored and persisted”, at the end of this project we will have:
 - [x] Create your data model
