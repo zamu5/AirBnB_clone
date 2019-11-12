@@ -155,6 +155,31 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
                 else:
                     print(all_objs[key])
+            elif method[:8] == "destroy(" and method[-1] == ")":
+                id_str = method[8:-1]
+                id_num = shlex.split(id_str)
+                key = class_n + "." + id_num[0]
+                all_objs = storage.all()
+                if key not in all_objs:
+                    print("** no instance found **")
+                else:
+                    del all_objs[key]
+                    storage.save()
+            elif method[:7] == "update(" and method[-1] == ")":
+                met_str = method[7:-1]
+                met_arg = met_str.split(", ")
+                if len(met_arg) == 0:
+                    print("** instance id missing **")
+                elif len(met_arg) == 1:
+                    print("** attribute name missing ** ")
+                elif len(met_arg) == 2:
+                    print("** value missing **")
+                if len(met_arg) == 3:
+                    id_num = shlex.split(met_arg[0])[0]
+                    attr_k = shlex.split(met_arg[1])[0]
+                    attr_v = shlex.split(met_arg[2])[0]
+                    self.do_update("{} {} {} {}".format(class_n, id_num,
+                                                        attr_k, attr_v))
         else:
             return cmd.Cmd.default(self, line)
 
