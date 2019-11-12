@@ -11,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 import shlex
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -100,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
             all_objs = storage.all()
             key_aux = "{}.{}".format(list_arg[0], list_arg[1])
             if key_aux in all_objs:
-                a = getattr(all_objs[key_aux], list_arg[2], "")
+                a = getattr(all_objs[key_aux], list_arg[2])
                 setattr(all_objs[key_aux], list_arg[2], type(a)(list_arg[3]))
                 all_objs[key_aux].save()
 
@@ -172,9 +173,18 @@ class HBNBCommand(cmd.Cmd):
                     print("** instance id missing **")
                 elif len(met_arg) == 1:
                     print("** attribute name missing ** ")
+                elif len(met_arg) > 1 and met_arg[1][0] == "{":
+                    dict_str = ""
+                    id_num = shlex.split(met_arg[0])[0]
+                    for args in met_arg[1:]:
+                        dict_str += args + ", "
+                    new_dict = eval(dict_str[:-2])
+                    for k, v in new_dict.items():
+                        self.do_update("{} {} {} {}".format(class_n, id_num,
+                                                        k, v))
                 elif len(met_arg) == 2:
                     print("** value missing **")
-                if len(met_arg) == 3:
+                elif len(met_arg) == 3:
                     id_num = shlex.split(met_arg[0])[0]
                     attr_k = shlex.split(met_arg[1])[0]
                     attr_v = shlex.split(met_arg[2])[0]
