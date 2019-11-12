@@ -2,6 +2,12 @@
 """FileStorage Module"""
 
 from ..base_model import BaseModel
+from ..user import User
+from ..place import Place
+from ..state import State
+from ..city import City
+from ..amenity import Amenity
+from ..review import Review
 import json
 
 
@@ -12,6 +18,9 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = {}
+    com_list = {"BaseModel" : BaseModel, "User" : User, "Place": Place,
+                "State": State, "City": City, "Amenity": Amenity,
+                "Review": Review}
 
     def all(self):
         """returns the dictionary __objects"""
@@ -32,6 +41,7 @@ class FileStorage:
             with open(self.__file_path) as f:
                 o_json = json.loads(f.read())
                 for obj_elem in o_json:
-                    self.__objects[obj_elem] = BaseModel(**(o_json[obj_elem]))
+                    obj_class = obj_elem.split(".")
+                    self.__objects[obj_elem] = FileStorage.com_list[obj_class[0]](**(o_json[obj_elem]))
         except IOError:
             pass
