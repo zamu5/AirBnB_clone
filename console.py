@@ -4,12 +4,20 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
-
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand command interpreter"""
     prompt = '(hbnb) '
-    com_list = ["BaseModel"]
+    com_list = {"BaseModel" : BaseModel, "User" : User, "Place": Place,
+                "State": State, "City": City, "Amenity": Amenity,
+                "Review": Review}
+
 
     def do_create(self, arg):
         """
@@ -19,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         elif arg in self.com_list:
-            new_inst = BaseModel()
+            new_inst = HBNBCommand.com_list[arg]()
             new_inst.save()
             print(new_inst.id)
         else:
@@ -68,7 +76,6 @@ class HBNBCommand(cmd.Cmd):
                     del all_objs[key]
                     storage.save()
 
-<<<<<<< HEAD
     def do_update(self, line):
         list_arg = line.split()
         if len(list_arg) == 0:
