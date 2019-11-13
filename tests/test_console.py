@@ -29,10 +29,12 @@ class TestConsole(unittest.TestCase):
         """test the help command with args"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help quit")
-            self.assertEqual(f.getvalue(), 'stop the command line interpreter\n')
+            self.assertEqual(f.getvalue(),
+                             'stop the command line interpreter\n')
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("   help     quit    ")
-            self.assertEqual(f.getvalue(), 'stop the command line interpreter\n')
+            self.assertEqual(f.getvalue(),
+                             'stop the command line interpreter\n')
 
     def test_newline(self):
         """test empty line"""
@@ -110,8 +112,8 @@ class TestConsole(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("show " + class_n + " " + id_str)
                 obj_str = f.getvalue()
-                self.assertEqual(obj_str[:(41 + len(class_n))], '[' + class_n + '] ('
-                                 + id_str[:-1] + ')')
+                self.assertEqual(obj_str[:(41 + len(class_n))],
+                                 '[' + class_n + '] (' + id_str[:-1] + ')')
                 dict_obj = eval(obj_str[(41 + len(class_n)):-1])
                 self.assertTrue(type(dict_obj) is dict)
                 self.assertTrue(type(dict_obj["created_at"])
@@ -134,7 +136,7 @@ class TestConsole(unittest.TestCase):
                 HBNBCommand().onecmd("destroy " + class_n)
                 self.assertEqual(f.getvalue(), '** instance id missing **\n')
             with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd("destroy " + class_n + " 23534624535687876")
+                HBNBCommand().onecmd("destroy " + class_n + " 235346245356878")
                 self.assertEqual(f.getvalue(), '** no instance found **\n')
 
     def test_destroy_create(self):
@@ -146,8 +148,8 @@ class TestConsole(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("show " + class_n + " " + id_str)
                 obj_str = f.getvalue()
-                self.assertEqual(obj_str[:(41 + len(class_n))], '[' + class_n + '] ('
-                                 + id_str[:-1] + ')')
+                self.assertEqual(obj_str[:(41 + len(class_n))],
+                                 '[' + class_n + '] (' + id_str[:-1] + ')')
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("destroy " + class_n + " " + id_str)
             with patch('sys.stdout', new=StringIO()) as f:
@@ -191,7 +193,7 @@ class TestConsole(unittest.TestCase):
                 HBNBCommand().onecmd("update " + class_n)
                 self.assertEqual(f.getvalue(), '** instance id missing **\n')
             with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd("update " + class_n + " 23534624535687876")
+                HBNBCommand().onecmd("update " + class_n + " 2353462453568")
                 self.assertEqual(f.getvalue(), '** no instance found **\n')
 
     def test_update_create(self):
@@ -202,7 +204,8 @@ class TestConsole(unittest.TestCase):
                 id_str = f.getvalue()
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("update " + class_n + " " + id_str)
-                self.assertEqual(f.getvalue(), '** attribute name missing **\n')
+                self.assertEqual(f.getvalue(),
+                                 '** attribute name missing **\n')
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("update " + class_n + " " + id_str +
                                      " first_name")
