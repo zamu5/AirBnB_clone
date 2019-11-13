@@ -102,7 +102,12 @@ class HBNBCommand(cmd.Cmd):
             key_aux = "{}.{}".format(list_arg[0], list_arg[1])
             if key_aux in all_objs:
                 a = getattr(all_objs[key_aux], list_arg[2], "")
-                setattr(all_objs[key_aux], list_arg[2], type(a)(list_arg[3]))
+                if type(a) is str:
+                    print(list_arg[3])
+                    l = shlex.split(list_arg[3])
+                    list_arg[3] = l[0]
+                    print(list_arg[3])
+                setattr(all_objs[key_aux], list_arg[2], (type(a)(list_arg[3])))
                 all_objs[key_aux].save()
 
     def do_all(self, line):
@@ -181,7 +186,7 @@ class HBNBCommand(cmd.Cmd):
                     new_dict = eval(dict_str[:-2])
                     for k, v in new_dict.items():
                         self.do_update("{} {} {} {}".format(class_n, id_num,
-                                                        k, v))
+                                                            k, v))
                 elif len(met_arg) == 2:
                     print("** value missing **")
                 elif len(met_arg) == 3:
