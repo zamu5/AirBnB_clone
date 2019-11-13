@@ -28,6 +28,9 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
+        """
+        Return a string with the output
+        """
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
