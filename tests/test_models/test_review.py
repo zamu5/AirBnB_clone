@@ -18,19 +18,19 @@ class TestReviewClass(unittest.TestCase):
     my_review.user_id = "124567543456"
     my_review.text = "Very Cool Place"
 
-    def test_instance(self):
+    def test_instance_rev(self):
         self.assertTrue(isinstance(self.my_review, Review))
 
-    def test_inheritance(self):
+    def test_inheritance_rev(self):
         self.assertTrue(issubclass(Review, BaseModel))
         self.assertTrue(issubclass(type(self.my_review), BaseModel))
 
-    def test_types(self):
+    def test_types_rev(self):
         self.assertTrue(type(self.my_review.place_id) is str)
         self.assertTrue(type(self.my_review.user_id) is str)
         self.assertTrue(type(self.my_review.text) is str)
 
-    def test_des_serialization(self):
+    def test_des_serialization_rev(self):
         review_dict = self.my_review.to_dict()
         self.assertTrue(type(review_dict) is dict)
         if os.path.exists("file.json"):
@@ -39,7 +39,9 @@ class TestReviewClass(unittest.TestCase):
         self.assertTrue(os.path.exists("file.json"))
         review_obj = storage.all()
         for each_obj_key in review_obj:
-            self.assertIsInstance(review_obj[each_obj_key], Review)
+            class_n = each_obj_key.split(".")
+            if class_n[0] == "Review":
+                self.assertIsInstance(review_obj[each_obj_key], Review)
         os.remove("file.json")
 
 if __name__ == '__main__':

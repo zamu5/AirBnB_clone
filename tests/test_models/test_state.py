@@ -17,17 +17,17 @@ class TestStateClass(unittest.TestCase):
     my_state = State()
     my_state.name = "Felicidonia"
 
-    def test_instance(self):
+    def test_instance_state(self):
         self.assertTrue(isinstance(self.my_state, State))
 
-    def test_inheritance(self):
+    def test_inheritance_state(self):
         self.assertTrue(issubclass(State, BaseModel))
         self.assertTrue(issubclass(type(self.my_state), BaseModel))
 
-    def test_types(self):
+    def test_types_state(self):
         self.assertTrue(type(self.my_state.name) is str)
 
-    def test_des_serialization(self):
+    def test_des_serialization_state(self):
         state_dict = self.my_state.to_dict()
         self.assertTrue(type(state_dict) is dict)
         if os.path.exists("file.json"):
@@ -36,7 +36,9 @@ class TestStateClass(unittest.TestCase):
         self.assertTrue(os.path.exists("file.json"))
         state_obj = storage.all()
         for each_obj_key in state_obj:
-            self.assertIsInstance(state_obj[each_obj_key], State)
+            class_n = each_obj_key.split(".")
+            if class_n[0] == "State":
+                self.assertIsInstance(state_obj[each_obj_key], State)
         os.remove("file.json")
 
 if __name__ == '__main__':
