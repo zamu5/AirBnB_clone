@@ -27,7 +27,7 @@ class TestPlaceClass(unittest.TestCase):
     my_place.amenity_ids = ["123674535", "13243565725"]
 
     def test_instance_place(self):
-        self.assertTrue(isinstance(self.my_place, Place))
+        self.assertIsInstance(self.my_place, Place)
 
     def test_inheritance_place(self):
         self.assertTrue(issubclass(Place, BaseModel))

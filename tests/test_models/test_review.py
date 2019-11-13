@@ -19,7 +19,7 @@ class TestReviewClass(unittest.TestCase):
     my_review.text = "Very Cool Place"
 
     def test_instance_rev(self):
-        self.assertTrue(isinstance(self.my_review, Review))
+        self.assertIsInstance(self.my_review, Review)
 
     def test_inheritance_rev(self):
         self.assertTrue(issubclass(Review, BaseModel))

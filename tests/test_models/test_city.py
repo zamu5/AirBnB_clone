@@ -19,7 +19,7 @@ class TestCityClass(unittest.TestCase):
     my_city.name = "Felicidonia"
 
     def test_instance_city(self):
-        self.assertTrue(isinstance(self.my_city, City))
+        self.assertIsInstance(self.my_city, City)
 
     def test_inheritance_city(self):
         self.assertTrue(issubclass(City, BaseModel))

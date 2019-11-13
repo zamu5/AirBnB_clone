@@ -22,7 +22,7 @@ class TestUserClass(unittest.TestCase):
 
     def test_instance_user(self):
         """test instance"""
-        self.assertEqual(isinstance(self.my_user, User), True)
+        self.assertIsInstance(self.my_user, User)
 
     def test_inheritance_user(self):
         """test inherit from BaseModel"""
