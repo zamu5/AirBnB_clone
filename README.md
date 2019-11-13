@@ -32,10 +32,12 @@ Review | place_id, user_id: string, text
 
 Methods | Syntax
 ------------ | -------------
-Create | create class name
-Show | show class name id
-Destroy | destroy class name id
-All | all class name (optional)
+Create | create (class name)
+Show | show (class name) (id)
+Destroy | destroy (class name) (id)
+All | all (class name) (optional)
+(class name).(method) | (class name).(method)(arguments of the method) 
+
 ### How to start it 🔧
 
 To start use the console is necesary execute the file console.py
