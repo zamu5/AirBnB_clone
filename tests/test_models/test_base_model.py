@@ -20,12 +20,12 @@ class TestBaseClass(unittest.TestCase):
 
     def test_instance_id(self):
         self.assertTrue(self.model.id != self.model_2.id)
-        self.assertTrue(isinstance(self.model.id, str))
-        self.assertTrue(isinstance(self.model_2.id, str))
+        self.assertIsInstance(self.model.id, str)
+        self.assertIsInstance(self.model_2.id, str)
 
     def test_datetime(self):
-        self.assertTrue(isinstance(self.model.created_at, datetime))
-        self.assertTrue(isinstance(self.model_2.created_at, datetime))
+        self.assertIsInstance(self.model.created_at, datetime)
+        self.assertIsInstance(self.model_2.created_at, datetime)
 
     def test_str(self):
         self.assertEqual(str(self.model), "[{}] ({}) {}".format(

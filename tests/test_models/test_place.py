@@ -14,20 +14,9 @@ class TestPlaceClass(unittest.TestCase):
     """class TestPlaceClass to test Place class"""
 
     my_place = Place()
-    my_place.city_id = "123456765432"
-    my_place.user_id = "124567543456"
-    my_place.name = "Felicidonia"
-    my_place.description = "Cool Place"
-    my_place.number_rooms = 2
-    my_place.number_bathrooms = 1
-    my_place.max_guest = 4
-    my_place.price_by_night = 50
-    my_place.latitude = 55.5
-    my_place.longitude = 34.6
-    my_place.amenity_ids = ["123674535", "13243565725"]
 
     def test_instance_place(self):
-        self.assertTrue(isinstance(self.my_place, Place))
+        self.assertIsInstance(self.my_place, Place)
 
     def test_inheritance_place(self):
         self.assertTrue(issubclass(Place, BaseModel))

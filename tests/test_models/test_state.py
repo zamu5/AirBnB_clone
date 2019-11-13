@@ -15,10 +15,9 @@ class TestStateClass(unittest.TestCase):
     """class TestStateClass to test State class"""
 
     my_state = State()
-    my_state.name = "Felicidonia"
 
     def test_instance_state(self):
-        self.assertTrue(isinstance(self.my_state, State))
+        self.assertIsInstance(self.my_state, State)
 
     def test_inheritance_state(self):
         self.assertTrue(issubclass(State, BaseModel))

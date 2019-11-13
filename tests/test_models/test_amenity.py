@@ -14,10 +14,9 @@ class TestAmenityClass(unittest.TestCase):
     """class TestAmenityClass to test Amenity class"""
 
     my_amenity = Amenity()
-    my_amenity.name = "BBQ"
 
     def test_instance_amenity(self):
-        self.assertTrue(isinstance(self.my_amenity, Amenity))
+        self.assertIsInstance(self.my_amenity, Amenity)
 
     def test_inheritance_amenity(self):
         self.assertTrue(issubclass(Amenity, BaseModel))
