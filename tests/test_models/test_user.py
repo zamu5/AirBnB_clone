@@ -22,33 +22,33 @@ class TestUserClass(unittest.TestCase):
 
     def test_instance_user(self):
         """test instance"""
-        self.assertTrue(isinstance(self.my_user, User))
+        self.assertEqual(isinstance(self.my_user, User), True)
 
     def test_inheritance_user(self):
         """test inherit from BaseModel"""
-        self.assertTrue(issubclass(User, BaseModel))
-        self.assertTrue(issubclass(type(self.my_user), BaseModel))
+        self.assertEqual(issubclass(User, BaseModel), True)
+        self.assertEqual(issubclass(type(self.my_user), BaseModel), True)
 
     def test_attr_user(self):
         """test attributes"""
-        self.assertTrue(hasattr(self.my_user, 'first_name'))
-        self.assertTrue(hasattr(self.my_user, 'last_name'))
-        self.assertTrue(hasattr(self.my_user, 'email'))
-        self.assertTrue(hasattr(self.my_user, 'password'))
+        self.assertEqual(hasattr(self.my_user, 'first_name'), True)
+        self.assertEqual(hasattr(self.my_user, 'last_name'), True)
+        self.assertEqual(hasattr(self.my_user, 'email'), True)
+        self.assertEqual(hasattr(self.my_user, 'password'), True)
 
     def test_types_user(self):
         """test attributes types"""
-        self.assertTrue(type(self.my_user.email) is str)
-        self.assertTrue(type(self.my_user.password) is str)
-        self.assertTrue(type(self.my_user.first_name) is str)
-        self.assertTrue(type(self.my_user.last_name) is str)
+        self.assertEqual(type(self.my_user.email) is str, True)
+        self.assertEqual(type(self.my_user.password) is str, True)
+        self.assertEqual(type(self.my_user.first_name) is str, True)
+        self.assertEqual(type(self.my_user.last_name) is str, True)
         self.assertIsInstance(self.my_user.created_at, datetime.datetime)
         self.assertIsInstance(self.my_user.updated_at, datetime.datetime)
 
     def test_des_serialization_user(self):
         """test seriarization and deserialization"""
         user_dict = self.my_user.to_dict()
-        self.assertTrue(type(user_dict) is dict)
+        self.assertEqual(type(user_dict) is dict, True)
 
 if __name__ == '__main__':
     unittest.main()
