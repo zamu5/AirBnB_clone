@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
                             list_arg[1])not in storage.all().keys():
             print("** no instance found **")
         elif len(list_arg) == 2:
-            print("** attribute name missing ** ")
+            print("** attribute name missing **")
         elif len(list_arg) == 3:
             print("** value missing **")
         else:
@@ -175,7 +175,7 @@ class HBNBCommand(cmd.Cmd):
                 if len(met_arg) == 0:
                     print("** instance id missing **")
                 elif len(met_arg) == 1:
-                    print("** attribute name missing ** ")
+                    print("** attribute name missing **")
                 elif len(met_arg) > 1 and met_arg[1][0] == "{":
                     dict_str = ""
                     id_num = shlex.split(met_arg[0])[0]
