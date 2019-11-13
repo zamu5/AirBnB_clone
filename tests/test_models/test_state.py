@@ -30,16 +30,6 @@ class TestStateClass(unittest.TestCase):
     def test_des_serialization_state(self):
         state_dict = self.my_state.to_dict()
         self.assertTrue(type(state_dict) is dict)
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        self.my_state.save()
-        self.assertTrue(os.path.exists("file.json"))
-        state_obj = storage.all()
-        for each_obj_key in state_obj:
-            class_n = each_obj_key.split(".")
-            if class_n[0] == "State":
-                self.assertIsInstance(state_obj[each_obj_key], State)
-        os.remove("file.json")
 
 if __name__ == '__main__':
     unittest.main()

@@ -51,16 +51,6 @@ class TestPlaceClass(unittest.TestCase):
     def test_des_serialization_place(self):
         place_dict = self.my_place.to_dict()
         self.assertTrue(type(place_dict) is dict)
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        self.my_place.save()
-        self.assertTrue(os.path.exists("file.json"))
-        place_obj = storage.all()
-        for each_obj_key in place_obj:
-            class_n = each_obj_key.split(".")
-            if class_n[0] == "Place":
-                self.assertIsInstance(place_obj[each_obj_key], Place)
-        os.remove("file.json")
 
 if __name__ == '__main__':
     unittest.main()

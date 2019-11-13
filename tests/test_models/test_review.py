@@ -33,16 +33,6 @@ class TestReviewClass(unittest.TestCase):
     def test_des_serialization_rev(self):
         review_dict = self.my_review.to_dict()
         self.assertTrue(type(review_dict) is dict)
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        self.my_review.save()
-        self.assertTrue(os.path.exists("file.json"))
-        review_obj = storage.all()
-        for each_obj_key in review_obj:
-            class_n = each_obj_key.split(".")
-            if class_n[0] == "Review":
-                self.assertIsInstance(review_obj[each_obj_key], Review)
-        os.remove("file.json")
 
 if __name__ == '__main__':
     unittest.main()

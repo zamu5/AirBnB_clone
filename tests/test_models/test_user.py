@@ -49,16 +49,6 @@ class TestUserClass(unittest.TestCase):
         """test seriarization and deserialization"""
         user_dict = self.my_user.to_dict()
         self.assertTrue(type(user_dict) is dict)
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        self.my_user.save()
-        self.assertTrue(os.path.exists("file.json"))
-        user_obj = storage.all()
-        for each_obj_key in user_obj:
-            class_n = each_obj_key.split(".")
-            if class_n[0] == "User":
-                self.assertIsInstance(user_obj[each_obj_key], User)
-        os.remove("file.json")
 
 if __name__ == '__main__':
     unittest.main()
