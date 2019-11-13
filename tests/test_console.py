@@ -224,5 +224,89 @@ class TestConsole(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    def test_class_all(self):
+        """test <class_name>.all() method"""
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".all()")
+                str_list = f.getvalue()
+                self.assertNotEqual(str_list, "")
+                list_of_str = eval(str_list[:-1])
+                self.assertTrue(type(list_of_str) is list)
+                for item in list_of_str:
+                    self.assertTrue(type(item) is str)
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
+    def test_class_count(self):
+        """test <class_name>.count() method"""
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".count()")
+                str_list = f.getvalue()
+                num1 = int(str_list[:-1])
+                self.assertTrue(type(num1) is int)
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".count()")
+                str_list = f.getvalue()
+                num2 = int(str_list[:-1])
+                self.assertEqual(num1 + 1, num2)
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
+    def test_class_show(self):
+        """test <class_name>.show() method"""
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".show(\"Holberton\")")
+                self.assertEqual(f.getvalue(), '** no instance found **\n')
+
+    def test_class_show_create(self):
+        """test show command with objects"""
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+                id_str = f.getvalue()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".show(" + id_str[:-1] + ")")
+                obj_str = f.getvalue()
+                self.assertEqual(obj_str[:(41 + len(class_n))],
+                                 '[' + class_n + '] (' + id_str[:-1] + ')')
+                dict_obj = eval(obj_str[(41 + len(class_n)):-1])
+                self.assertTrue(type(dict_obj) is dict)
+                self.assertTrue(type(dict_obj["created_at"])
+                                is datetime.datetime)
+                self.assertTrue(type(dict_obj["updated_at"])
+                                is datetime.datetime)
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
+    def test_class_destroy(self):
+        """test <class_name>.destroy() method"""
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".destroy(\"Holberton\")")
+                self.assertEqual(f.getvalue(), '** no instance found **\n')
+
+    def test_class_destroy_create(self):
+        """test show command with objects"""
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+                id_str = f.getvalue()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".destroy(" + id_str[:-1] + ")")
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".show(" + id_str[:-1] + ")")
+                self.assertEqual(f.getvalue(), '** no instance found **\n')
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
 if __name__ == '__main__':
     unittest.main()
