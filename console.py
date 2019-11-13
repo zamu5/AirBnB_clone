@@ -103,10 +103,8 @@ class HBNBCommand(cmd.Cmd):
             if key_aux in all_objs:
                 a = getattr(all_objs[key_aux], list_arg[2], "")
                 if type(a) is str:
-                    print(list_arg[3])
                     l = shlex.split(list_arg[3])
                     list_arg[3] = l[0]
-                    print(list_arg[3])
                 setattr(all_objs[key_aux], list_arg[2], (type(a)(list_arg[3])))
                 all_objs[key_aux].save()
 
