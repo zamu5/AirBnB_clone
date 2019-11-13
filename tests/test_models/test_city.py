@@ -32,16 +32,6 @@ class TestCityClass(unittest.TestCase):
     def test_des_serialization_city(self):
         city_dict = self.my_city.to_dict()
         self.assertTrue(type(city_dict) is dict)
-        if os.path.exists("file.json"):
-            os.remove("file.json")
-        self.my_city.save()
-        self.assertTrue(os.path.exists("file.json"))
-        city_obj = storage.all()
-        for each_obj_key in city_obj:
-            class_n = each_obj_key.split(".")
-            if class_n[0] == "City":
-                self.assertIsInstance(city_obj[each_obj_key], City)
-        os.remove("file.json")
 
 if __name__ == '__main__':
     unittest.main()
