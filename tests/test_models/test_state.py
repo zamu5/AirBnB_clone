@@ -15,7 +15,6 @@ class TestStateClass(unittest.TestCase):
     """class TestStateClass to test State class"""
 
     my_state = State()
-    my_state.name = "Felicidonia"
 
     def test_instance_state(self):
         self.assertIsInstance(self.my_state, State)

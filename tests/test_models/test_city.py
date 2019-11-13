@@ -15,8 +15,6 @@ class TestCityClass(unittest.TestCase):
     """class TestCityClass to test City class"""
 
     my_city = City()
-    my_city.state_id = "123567890987654"
-    my_city.name = "Felicidonia"
 
     def test_instance_city(self):
         self.assertIsInstance(self.my_city, City)

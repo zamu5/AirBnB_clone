@@ -14,7 +14,6 @@ class TestAmenityClass(unittest.TestCase):
     """class TestAmenityClass to test Amenity class"""
 
     my_amenity = Amenity()
-    my_amenity.name = "BBQ"
 
     def test_instance_amenity(self):
         self.assertIsInstance(self.my_amenity, Amenity)

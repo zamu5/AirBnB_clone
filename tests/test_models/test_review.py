@@ -14,9 +14,6 @@ class TestReviewClass(unittest.TestCase):
     """class TestReviewClass to test Review class"""
 
     my_review = Review()
-    my_review.place_id = "123456765432"
-    my_review.user_id = "124567543456"
-    my_review.text = "Very Cool Place"
 
     def test_instance_rev(self):
         self.assertIsInstance(self.my_review, Review)
