@@ -26,14 +26,14 @@ class TestPlaceClass(unittest.TestCase):
     my_place.longitude = 34.6
     my_place.amenity_ids = ["123674535", "13243565725"]
 
-    def test_instance(self):
+    def test_instance_place(self):
         self.assertTrue(isinstance(self.my_place, Place))
 
-    def test_inheritance(self):
+    def test_inheritance_place(self):
         self.assertTrue(issubclass(Place, BaseModel))
         self.assertTrue(issubclass(type(self.my_place), BaseModel))
 
-    def test_types(self):
+    def test_types_place(self):
         self.assertTrue(type(self.my_place.name) is str)
         self.assertTrue(type(self.my_place.city_id) is str)
         self.assertTrue(type(self.my_place.user_id) is str)
@@ -48,7 +48,7 @@ class TestPlaceClass(unittest.TestCase):
         for items in self.my_place.amenity_ids:
             self.assertTrue(type(items) is str)
 
-    def test_des_serialization(self):
+    def test_des_serialization_place(self):
         place_dict = self.my_place.to_dict()
         self.assertTrue(type(place_dict) is dict)
         if os.path.exists("file.json"):
@@ -57,7 +57,9 @@ class TestPlaceClass(unittest.TestCase):
         self.assertTrue(os.path.exists("file.json"))
         place_obj = storage.all()
         for each_obj_key in place_obj:
-            self.assertIsInstance(place_obj[each_obj_key], Place)
+            class_n = each_obj_key.split(".")
+            if class_n[0] == "Place":
+                self.assertIsInstance(place_obj[each_obj_key], Place)
         os.remove("file.json")
 
 if __name__ == '__main__':

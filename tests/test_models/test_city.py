@@ -18,18 +18,18 @@ class TestCityClass(unittest.TestCase):
     my_city.state_id = "123567890987654"
     my_city.name = "Felicidonia"
 
-    def test_instance(self):
+    def test_instance_city(self):
         self.assertTrue(isinstance(self.my_city, City))
 
-    def test_inheritance(self):
+    def test_inheritance_city(self):
         self.assertTrue(issubclass(City, BaseModel))
         self.assertTrue(issubclass(type(self.my_city), BaseModel))
 
-    def test_types(self):
+    def test_types_city(self):
         self.assertTrue(type(self.my_city.name) is str)
         self.assertTrue(type(self.my_city.state_id) is str)
 
-    def test_des_serialization(self):
+    def test_des_serialization_city(self):
         city_dict = self.my_city.to_dict()
         self.assertTrue(type(city_dict) is dict)
         if os.path.exists("file.json"):
@@ -38,7 +38,9 @@ class TestCityClass(unittest.TestCase):
         self.assertTrue(os.path.exists("file.json"))
         city_obj = storage.all()
         for each_obj_key in city_obj:
-            self.assertIsInstance(city_obj[each_obj_key], City)
+            class_n = each_obj_key.split(".")
+            if class_n[0] == "City":
+                self.assertIsInstance(city_obj[each_obj_key], City)
         os.remove("file.json")
 
 if __name__ == '__main__':

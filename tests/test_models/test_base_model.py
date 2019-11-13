@@ -27,10 +27,6 @@ class TestBaseClass(unittest.TestCase):
         self.assertTrue(isinstance(self.model.created_at, datetime))
         self.assertTrue(isinstance(self.model_2.created_at, datetime))
 
-    def test_time(self):
-        self.assertIsInstance(datetime.strptime(
-            self.model.created_at, "%Y-%m-%dT%H:%M:%S.%f"), datetime)
-
     def test_str(self):
         self.assertEqual(str(self.model), "[{}] ({}) {}".format(
             self.model.__class__.__name__, self.model.id, self.model.__dict__))
