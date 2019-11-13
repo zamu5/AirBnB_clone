@@ -56,16 +56,6 @@ class TestBaseClass(unittest.TestCase):
         prev_date = self.model.updated_at
         self.model.save()
         self.assertTrue(self.model.updated_at != prev_date)
-        with open("file.json") as f:
-            self.assertTrue(f.read())
-        with open("file.json") as f:
-            json_string = f.read()
-            obj = json.loads(json_string)
-            self.assertTrue(type(obj) is dict)
-            for k, v in obj.items():
-                self.assertTrue(type(k) is str)
-                self.assertEqual(k, "{}.{}".format(v["__class__"], v["id"]))
-                self.assertTrue(type(v) is dict)
         os.remove("file.json")
 
     def test_from_dictionary(self):
