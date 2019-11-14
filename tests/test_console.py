@@ -308,5 +308,69 @@ class TestConsole(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    def test_class_update(self):
+        """test <class_name>.update(<id>, <attribute_name>, <attribute_value>)
+        command
+        """
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".update(\"46543635156\")")
+                self.assertEqual(f.getvalue(),
+                                 '** attribute name missing **\n')
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n +
+                                     ".update(\"3521541313\", \"k\", \"v\")")
+                self.assertEqual(f.getvalue(), '** no instance found **\n')
+
+    def test_class_update_create(self):
+        """test <class_name>.update(<id>, <attribute_name>, <attribute_value>)
+        command
+        """
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+                id_str = f.getvalue()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".update(\"" + id_str +
+                                     "\", \"first_name\")")
+                self.assertEqual(f.getvalue(), '** value missing **\n')
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".update(\"" + id_str +
+                                     "\", \"first_name\", \"Betty\")")
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show " + class_n + " " + id_str)
+                obj_str = f.getvalue()
+                dict_obj = eval(obj_str[(41 + len(class_n)):-1])
+                self.assertTrue(type(dict_obj) is dict)
+                self.assertIn("first_name", dict_obj)
+                self.assertTrue(type(dict_obj["first_name"]) is str)
+                self.assertEqual(dict_obj["first_name"], "Betty")
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
+    def test_class_update_dict(self):
+        """test <class_name>.update(<id>, <dictionary>)
+        command
+        """
+        for class_n in self.list_class:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create " + class_n)
+                id_str = f.getvalue()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(class_n + ".update(\"" + id_str +
+                                     "\", {\'first_name\': \"Betty\","
+                                     " \"age\": 89})")
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("show " + class_n + " " + id_str)
+                obj_str = f.getvalue()
+                dict_obj = eval(obj_str[(41 + len(class_n)):-1])
+                self.assertTrue(type(dict_obj) is dict)
+                self.assertIn("first_name", dict_obj)
+                self.assertTrue(type(dict_obj["first_name"]) is str)
+                self.assertEqual(dict_obj["first_name"], "Betty")
+                self.assertIn("age", dict_obj)
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
 if __name__ == '__main__':
     unittest.main()
